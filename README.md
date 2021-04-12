@@ -1,2 +1,3 @@
-# hellion
-This is just a trial of the original one.....pls dont steal this code....
+# helion
+
+# main2.py is the updated code
