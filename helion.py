@@ -30,12 +30,13 @@ def disable():
 
 
 def wishMe():
-    speak("Hello Brother, I am the one and only Helion!")
+   speak("hi,i am helion and i will be your best friend")
    # speak(
         #"I have only one rule - Dont listen to anyone. But as you are my boss i will only read your commands. So enter the command in the space below.")
 
 def fred():
     engine.setProperty('voice', voices[1].id)
+    speak("Enabled karen")
     speak("hello, i am Karen. Lets get right into your service. What do you want?")
     speak('though whatever you ask me should be put to good use')
 
@@ -63,8 +64,8 @@ if __name__ == "__main__":
             speak("type Book-1 to listen to the ligthning thief and type Book-2 to listen to the sea of monsters")
             print("type Book-1 to listen to the ligthning thief and type Book-2 to listen to the sea of monsters")
 
-            books = input("Enter the name of the pdf ( pls make it end with .pdf) = ")
-            book = open(books, 'rb')
+            books = input("Enter the name of the pdf  = ")
+            book = open(books + ".pdf", 'rb')
             pdfReader = PyPDF2.PdfFileReader(book)
             pagen = int(input("Start page - "))
             pageN = int(input("END page - "))
@@ -101,8 +102,127 @@ if __name__ == "__main__":
             speak('playing ' + song)
             pywhatkit.playonyt(song)
 
+        elif 'translate' in command:
+            from tkinter import *
+            from tkinter import ttk
+            from googletrans import Translator, LANGUAGES
+
+            root = Tk()
+            root.geometry('1080x400')
+            root.resizable(0, 0)
+            root.config(bg='ghost white')
+
+            root.title("Project Gurukul--Language Translator")
+
+            Label(root, text="LANGUAGE TRANSLATOR", font="arial 20 bold", bg='white smoke').pack()
+
+            Label(root, text="Project Gurukul", font='arial 15 bold', bg='white smoke', width='20').pack(side='bottom')
+
+            Label(root, text="Enter Text", font='arial 13 bold', bg='white smoke').place(x=200, y=60)
+
+            Input_text = Text(root, font='arial 10', height=11, wrap=WORD, padx=5, pady=5, width=60)
+            Input_text.place(x=30, y=100)
+
+            Label(root, text="Output", font='arial 13 bold', bg='white smoke').place(x=780, y=60)
+
+            Output_text = Text(root, font='arial 10', height=11, wrap=WORD, padx=5, pady=5, width=60)
+            Output_text.place(x=600, y=100)
+
+            language = list(LANGUAGES.values())
+
+            src_lang = ttk.Combobox(root, values=language, width=22)
+            src_lang.place(x=20, y=60)
+            src_lang.set('')
+
+            dest_lang = ttk.Combobox(root, values=language, width=22)
+            dest_lang.place(x=890, y=60)
+            dest_lang.set('')
+
+
+            def Translate():
+                translator = Translator()
+                translated = translator.translate(text=Input_text.get(1.0, END), src=src_lang.get(),
+                                                  dest=dest_lang.get())
+
+                Output_text.delete(1.0, END)
+                Output_text.insert(END, translated.text)
+
+
+            trans_btn = Button(root, text='Translate', font='arial 12 bold', pady=5, command=Translate,
+                               bg='royal blue1', activebackground='sky blue')
+
+            trans_btn.place(x=490, y=180)
+
+            root.mainloop()
+
         elif 'you there' in command:
             speak("at your service sir")
+        elif 'mirror' in command:
+            import numpy as np
+            import os
+            import cv2
+
+            filename = 'video.avi'
+            frames_per_second = 24.0
+            res = '720p'
+
+
+            # Set resolution for the video capture
+            # Function adapted from https://kirr.co/0l6qmh
+            def change_res(cap, width, height):
+                cap.set(3, width)
+                cap.set(4, height)
+
+
+            # Standard Video Dimensions Sizes
+            STD_DIMENSIONS = {
+                "480p": (640, 480),
+                "720p": (1280, 720),
+                "1080p": (1920, 1080),
+                "4k": (3840, 2160),
+            }
+
+
+            # grab resolution dimensions and set video capture to it.
+            def get_dims(cap, res='1080p'):
+                width, height = STD_DIMENSIONS["480p"]
+                if res in STD_DIMENSIONS:
+                    width, height = STD_DIMENSIONS[res]
+                ## change the current caputre device
+                ## to the resulting resolution
+                change_res(cap, width, height)
+                return width, height
+
+
+            # Video Encoding, might require additional installs
+            # Types of Codes: http://www.fourcc.org/codecs.php
+            VIDEO_TYPE = {
+                'avi': cv2.VideoWriter_fourcc(*'XVID'),
+                # 'mp4': cv2.VideoWriter_fourcc(*'H264'),
+                'mp4': cv2.VideoWriter_fourcc(*'XVID'),
+            }
+
+
+            def get_video_type(filename):
+                filename, ext = os.path.splitext(filename)
+                if ext in VIDEO_TYPE:
+                    return VIDEO_TYPE[ext]
+                return VIDEO_TYPE['avi']
+
+
+            cap = cv2.VideoCapture(0)
+            out = cv2.VideoWriter(filename, get_video_type(filename), 25, get_dims(cap, res))
+
+            while True:
+                ret, frame = cap.read()
+                out.write(frame)
+                cv2.imshow('frame', frame)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+            cap.release()
+            out.release()
+            cv2.destroyAllWindows()
         elif 'safe' in command:
             import random
 
@@ -111,7 +231,7 @@ if __name__ == "__main__":
             userName = input("Please type in the user-name = ")
             password = random
             print("password: H*****L")
-            if userName == "Helion" and password == random:
+            if  password == random:
                # os.system('C:\Program Files(x86)\Google\Chrome\Application\chrome.exe -ArgumentList @( -incognito, www.foo.com)')
                webbrowser.open("https://duckduckgo.com/?natb=v268-5qo&cp=atbhc")
                speak("You are now safe and secured from hackers, enjoy surfing")
@@ -127,9 +247,14 @@ if __name__ == "__main__":
             webbrowser.open("https://www.primevideo.com/ref=av_auth_return_redir")
         elif 'hello' in command:
             speak("Hello!")
+        elif 'send a message' in command:
+            speak("Pls type the message you want to send")
+            message = input("The message you want to send: ")
+            contact = input("Enter the name of the person you want to send: ")
+            pywhatkit.sendwhatmsg(contact, message, datetime.datetime.now().strftime('%I:%M:%S %p'))
         elif 'movie i can watch' in command:
             speak("sure there is")
-            speak("You can either watch Star wars or see a sitcom series known as Wanda-Vision")
+            speak("You can either watch THE MANDOLORIAN or see a sitcom series known as Wanda-Vision")
         elif 'hotstar' in command:
             speak("sure")
             webbrowser.open("https://www.hotstar.com/in")
@@ -151,6 +276,9 @@ if __name__ == "__main__":
 
         elif 'netflix' in command:
             webbrowser.open("https://www.netflix.com/in/")
+        elif 'stupid' in command:
+            speak("You stupid")
+            print("You stupid")
 
 
         elif 'play' in command:
