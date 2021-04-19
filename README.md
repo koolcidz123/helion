@@ -1,6 +1,6 @@
 # helion
 
-# main2.py is the updated code
+# helion.py is the updated code
 
 Install-
 1. pip install pywhatkit
