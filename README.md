@@ -26,3 +26,12 @@ List of commands -
 9. type #disable to change back to male voice
 10. type #play(+the video name) to play a youtube video
 11. type #read me a book to make the AI read you some books
+12. type #set alarm to make the AI set an alarm for the time you inputed
+13. type #safe to open up a secure search engine
+14. type #calculator to open up a calculator
+15. type #open amazon to open the amazon.in
+16. type #hotstar to open Disney+ Hotstar
+17. type #primevideo to open Amazon PrimeVideo
+18. type #netflix to open Netflix
+19. type #bored to be play a game or hear a joke
+20. type #discord to open DISCORD
