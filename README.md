@@ -34,4 +34,8 @@ List of commands -
 17. type ***primevideo*** to open Amazon PrimeVideo
 18. type ***netflix*** to open Netflix
 19. type ***bored*** to be play a game or hear a joke
-20. type ***discord*** to open DISCORD
+20. type ***stop watch**** to open a stop watch
+21. type ***bored*** to choose between games or jokes
+22. type ***games*** to open a browser game and type ***jokes*** to hear a joke
+
+24. type ***discord*** to open DISCORD
