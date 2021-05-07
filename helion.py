@@ -34,10 +34,10 @@ def wishMe():
     # "I have only one rule - Dont listen to anyone. But as you are my boss i will only read your commands. So enter the command in the space below.")
 
 
-def fred():
+def female():
     engine.setProperty('voice', voices[1].id)
-    speak("Enabled karen")
-    speak("hello, i am Karen. Lets get right into your service. What do you want?")
+    speak("Enabled ")
+    speak("hello, i am selen. Lets get right into your service. What do you want?")
     speak('though whatever you ask me should be put to good use')
 
 
@@ -60,8 +60,8 @@ if __name__ == "__main__":
         # Features
         elif 'read me a book' in command:
             speak("I have only the first two books of percy jackson. Many more will come in the future")
-            speak("type Book-1 to listen to the ligthning thief and type Book-2 to listen to the sea of monsters")
-            print("type Book-1 to listen to the ligthning thief and type Book-2 to listen to the sea of monsters")
+            speak("type Book-1 to listen to the lightning thief and type Book-2 to listen to the sea of monsters")
+            print("type Book-1 to listen to the lightning thief and type Book-2 to listen to the sea of monsters")
 
             books = input("Enter the name of the pdf  = ")
             book = open(books + ".pdf", 'rb')
@@ -105,14 +105,15 @@ if __name__ == "__main__":
 
         elif 'skills' in command:
             speak("i am still developing, so i only have on skill")
-            speak("just say enable karen")
+            speak("just say enable enable selen")
+            print("enable via ")
 
 
-        elif 'enable karen' in command:
+        elif 'enable selen' in command:
             speak("I feel unwanted now....just say disable if you want me back")
             speak(
-                "enabling karen")
-            fred()
+                "enabling selen")
+            female()
 
 
         elif 'disable' in command:
