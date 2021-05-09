@@ -22,7 +22,7 @@ List of commands -
 5. type ***who is(name of the person)*** to get the wikipedia results about the person
 6. type ***clock*** to see a digital clock
 7. type ***time*** to get the current time
-8. type ***enable karen*** to change to a female voice
+8. type ***enable selen*** to change to a female voice
 9. type ***disable*** to change back to male voice
 10. type ***play(+the video name)*** to play a youtube video
 11. type ***read me a book*** to make the AI read you some books
