@@ -29,6 +29,7 @@ def disable():
 
 
 def wishMe():
+
     speak("hi,i am helion and i will be your best friend")
     # speak(
     # "I have only one rule - Dont listen to anyone. But as you are my boss i will only read your commands. So enter the command in the space below.")
@@ -43,6 +44,9 @@ def female():
 
 if __name__ == "__main__":
     wishMe()
+   
+    
+
     while True:
 
         command = input("Command:-  ").lower()
@@ -117,7 +121,7 @@ if __name__ == "__main__":
 
 
         elif 'disable' in command:
-            speak("Wait you want that dumb helion again...he has no brain....")
+            speak("Wait you want that dumb helion again...it has no brain....")
             disable()
 
 
@@ -168,7 +172,7 @@ if __name__ == "__main__":
             webbrowser.open("https://www.hotstar.com/in")
 
 
-        elif 'WandaVision' in command:
+        elif 'wandavision' in command:
             speak("great choice boss")
             webbrowser.open("https://www.hotstar.com/in/tv/wandavision/1260051344")
 
@@ -183,11 +187,10 @@ if __name__ == "__main__":
 
         elif 'search' in command:
             # speak("fine! Now i have to make you learn. Great, Just Great.")
-            speak("Enter the search query")
-            term = input("Enter search query - ")
-            results = wikipedia.summary("who is " + term, 2)
-            print(results)
-            speak(results)
+            query = input("Enter the search query- ")
+            speak("The results will be opening.")
+            webbrowser.open("http://google.com/search?q=" + query)
+
 
 
         elif 'you there' in command:
@@ -346,7 +349,7 @@ if __name__ == "__main__":
 
 
         elif 'weather' in command:
-            speak("Okay, pls type in your city name in the box that will open now")
+            speak("Okay, please type in your city name in the box that will open now")
 
             import tkinter as tk
             import requests
@@ -360,29 +363,21 @@ if __name__ == "__main__":
                 json_data = requests.get(api).json()
                 condition = json_data['weather'][0]['main']
                 temp = int(json_data['main']['temp'] - 273.15)
-                min_temp = int(json_data['main']['temp_min'] - 273.15)
-
-                max_temp = int(json_data['main']['temp_max'] - 273.15)
-
+                current_temp = int(json_data['main']['temp_min'] - 273.15)
                 pressure = json_data['main']['pressure']
                 humidity = json_data['main']['humidity']
                 wind = json_data['wind']['speed']
                 sunrise = time.strftime('%I:%M:%S', time.gmtime(json_data['sys']['sunrise'] - 21600))
                 sunset = time.strftime('%I:%M:%S', time.gmtime(json_data['sys']['sunset'] - 21600))
 
-                # speak min_temp
-                speak("Minimum Temperature is")
-                speak(min_temp)
+                # speak current_temp
+                speak("Current Temperature is")
+                speak(current_temp)
                 speak("degrees celcius")
 
-                # speak max_temp
-                speak("maximum temperature is")
-                speak(max_temp)
-                speak("degrees celcius")
 
                 final_info = condition + "\n" + str(temp) + "°C"
-                final_data = "\n" + "Min Temp: " + str(min_temp) + "°C" + "\n" + "Max Temp: " + str(
-                    max_temp) + "°C" + "\n" + "Pressure: " + str(pressure) + "\n" + "Humidity: " + str(
+                final_data = "\n" + "Current temperature: " + str(current_temp) + "°C" +  "\n" + "Pressure: " + str(pressure) + "\n" + "Humidity: " + str(
                     humidity) + "\n" + "Wind Speed: " + str(
                     wind) + "\n" + "Sunrise: " + sunrise + "\n" + "Sunset: " + sunset
                 label1.config(text=final_info)
@@ -390,7 +385,7 @@ if __name__ == "__main__":
 
 
             canvas = tk.Tk()
-            canvas.geometry("600x500")
+            canvas.geometry("1000x900")
             canvas.title("Weather App")
             f = ("poppins", 15, "bold")
             t = ("poppins", 35, "bold")
@@ -521,65 +516,6 @@ if __name__ == "__main__":
 
 
 
-        elif 'translate' in command:
-            from tkinter import *
-            from tkinter import ttk
-            from googletrans import Translator, LANGUAGES
-
-            root = Tk()
-            root.geometry('1080x400')
-            root.resizable(0, 0)
-            root.config(bg='ghost white')
-
-            root.title("Project Gurukul--Language Translator")
-
-            Label(root, text="LANGUAGE TRANSLATOR", font="arial 20 bold", bg='white smoke').pack()
-
-            Label(root, text="Project Gurukul", font='arial 15 bold', bg='white smoke', width='20').pack(side='bottom')
-
-            Label(root, text="Enter Text", font='arial 13 bold', bg='white smoke').place(x=200, y=60)
-
-            Input_text = Text(root, font='arial 10', height=11, wrap=WORD, padx=5, pady=5, width=60)
-            Input_text.place(x=30, y=100)
-
-            Label(root, text="Output", font='arial 13 bold', bg='white smoke').place(x=780, y=60)
-
-            Output_text = Text(root, font='arial 10', height=11, wrap=WORD, padx=5, pady=5, width=60)
-            Output_text.place(x=600, y=100)
-
-            language = list(LANGUAGES.values())
-
-            src_lang = ttk.Combobox(root, values=language, width=22)
-            src_lang.place(x=20, y=60)
-            src_lang.set('')
-
-            dest_lang = ttk.Combobox(root, values=language, width=22)
-            dest_lang.place(x=890, y=60)
-            dest_lang.set('')
-
-
-            def Translate():
-                translator = Translator()
-                translated = translator.translate(text=Input_text.get(1.0, END), src=src_lang.get(),
-                                                  dest=dest_lang.get())
-
-                Output_text.delete(1.0, END)
-                Output_text.insert(END, translated.text)
-
-
-            trans_btn = Button(root, text='Translate', font='arial 12 bold', pady=5, command=Translate,
-                               bg='royal blue1', activebackground='sky blue')
-
-            trans_btn.place(x=490, y=180)
-
-            root.mainloop()
-
-
-
-
-
-
-
         # for fun-
 
         elif 'your name' in command:
@@ -622,6 +558,8 @@ if __name__ == "__main__":
         elif 'hey' in command:
             speak("Hey!")
 
+        elif 'bruh' in command:
+            speak("Literal bruh moment. But why?")
 
         elif 'help me' in command:
             speak("How? I am not jarvis. I cant send suits. I aint EDITH or FRIDAY. I cant help, sorry.")
@@ -648,10 +586,231 @@ if __name__ == "__main__":
             speak(jokes)
             print(jokes)
 
-        elif 'games' in command:
+        elif 'games' or 'game' in command:
             speak("Sure gamer boss!")
-            webbrowser.open(
-                "https://studio.code.org/projects/gamelab/anOwgsamlKSR4RKeXDSjKJL9DcMKKOMJcEZt59mR64A/embed?nosource")
+            import random  # For generating random numbers
+            import sys  # We will use sys.exit to exit the program
+            import pygame
+            from pygame.locals import *  # Basic pygame imports
+
+            # Global Variables for the game
+            FPS = 32
+            SCREENWIDTH = 289
+            SCREENHEIGHT = 511
+            SCREEN = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
+            GROUNDY = SCREENHEIGHT * 0.8
+            GAME_SPRITES = {}
+            GAME_SOUNDS = {}
+            PLAYER = 'gallery/sprites/bird.png'
+            BACKGROUND = 'gallery/sprites/background.png'
+            PIPE = 'gallery/sprites/pipe.png'
+
+
+            def welcomeScreen():
+                """
+                Shows welcome images on the screen
+                """
+
+                playerx = int(SCREENWIDTH / 5)
+                playery = int((SCREENHEIGHT - GAME_SPRITES['player'].get_height()) / 2)
+                messagex = int((SCREENWIDTH - GAME_SPRITES['message'].get_width()) / 6)
+                messagey = int(SCREENHEIGHT * 0.01)
+                basex = 0
+                while True:
+                    for event in pygame.event.get():
+                        # if user clicks on cross button, close the game
+                        if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+                            pygame.quit()
+                            sys.exit()
+
+                        # If the user presses space or up key, start the game for them
+                        elif event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+                            return
+                        else:
+                            SCREEN.blit(GAME_SPRITES['background'], (0, 0))
+                            SCREEN.blit(GAME_SPRITES['player'], (playerx, playery))
+                            SCREEN.blit(GAME_SPRITES['message'], (messagex, messagey))
+                            SCREEN.blit(GAME_SPRITES['base'], (basex, GROUNDY))
+                            pygame.display.update()
+                            FPSCLOCK.tick(FPS)
+
+
+            def mainGame():
+                score = 0
+                playerx = int(SCREENWIDTH / 5)
+                playery = int(SCREENWIDTH / 2)
+                basex = 0
+
+                # Create 2 pipes for blitting on the screen
+                newPipe1 = getRandomPipe()
+                newPipe2 = getRandomPipe()
+
+                # my List of upper pipes
+                upperPipes = [
+                    {'x': SCREENWIDTH + 200, 'y': newPipe1[0]['y']},
+                    {'x': SCREENWIDTH + 200 + (SCREENWIDTH / 2), 'y': newPipe2[0]['y']},
+                ]
+                # my List of lower pipes
+                lowerPipes = [
+                    {'x': SCREENWIDTH + 200, 'y': newPipe1[1]['y']},
+                    {'x': SCREENWIDTH + 200 + (SCREENWIDTH / 2), 'y': newPipe2[1]['y']},
+                ]
+
+                pipeVelX = -4
+
+                playerVelY = -9
+                playerMaxVelY = 10
+                playerMinVelY = -8
+                playerAccY = 1
+
+                playerFlapAccv = -8  # velocity while flapping
+                playerFlapped = False  # It is true only when the bird is flapping
+
+                while True:
+                    for event in pygame.event.get():
+                        if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+                            pygame.quit()
+                            sys.exit()
+                        if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+                            if playery > 0:
+                                playerVelY = playerFlapAccv
+                                playerFlapped = True
+                                GAME_SOUNDS['wing'].play()
+
+                    crashTest = isCollide(playerx, playery, upperPipes,
+                                          lowerPipes)  # This function will return true if the player is crashed
+                    if crashTest:
+                        return
+
+                        # check for score
+                    playerMidPos = playerx + GAME_SPRITES['player'].get_width() / 2
+                    for pipe in upperPipes:
+                        pipeMidPos = pipe['x'] + GAME_SPRITES['pipe'][0].get_width() / 2
+                        if pipeMidPos <= playerMidPos < pipeMidPos + 4:
+                            score += 1
+                            print(f"Your score is {score}")
+                            GAME_SOUNDS['point'].play()
+
+                    if playerVelY < playerMaxVelY and not playerFlapped:
+                        playerVelY += playerAccY
+
+                    if playerFlapped:
+                        playerFlapped = False
+                    playerHeight = GAME_SPRITES['player'].get_height()
+                    playery = playery + min(playerVelY, GROUNDY - playery - playerHeight)
+
+                    # move pipes to the left
+                    for upperPipe, lowerPipe in zip(upperPipes, lowerPipes):
+                        upperPipe['x'] += pipeVelX
+                        lowerPipe['x'] += pipeVelX
+
+                    # Add a new pipe when the first is about to cross the leftmost part of the screen
+                    if 0 < upperPipes[0]['x'] < 5:
+                        newpipe = getRandomPipe()
+                        upperPipes.append(newpipe[0])
+                        lowerPipes.append(newpipe[1])
+
+                    # if the pipe is out of the screen, remove it
+                    if upperPipes[0]['x'] < -GAME_SPRITES['pipe'][0].get_width():
+                        upperPipes.pop(0)
+                        lowerPipes.pop(0)
+
+                    # Lets blit our sprites now
+                    SCREEN.blit(GAME_SPRITES['background'], (0, 0))
+                    for upperPipe, lowerPipe in zip(upperPipes, lowerPipes):
+                        SCREEN.blit(GAME_SPRITES['pipe'][0], (upperPipe['x'], upperPipe['y']))
+                        SCREEN.blit(GAME_SPRITES['pipe'][1], (lowerPipe['x'], lowerPipe['y']))
+
+                    SCREEN.blit(GAME_SPRITES['base'], (basex, GROUNDY))
+                    SCREEN.blit(GAME_SPRITES['player'], (playerx, playery))
+                    myDigits = [int(x) for x in list(str(score))]
+                    width = 0
+                    for digit in myDigits:
+                        width += GAME_SPRITES['numbers'][digit].get_width()
+                    Xoffset = (SCREENWIDTH - width) / 2
+
+                    for digit in myDigits:
+                        SCREEN.blit(GAME_SPRITES['numbers'][digit], (Xoffset, SCREENHEIGHT * 0.12))
+                        Xoffset += GAME_SPRITES['numbers'][digit].get_width()
+                    pygame.display.update()
+                    FPSCLOCK.tick(FPS)
+
+
+            def isCollide(playerx, playery, upperPipes, lowerPipes):
+                if playery > GROUNDY - 25 or playery < 0:
+                    GAME_SOUNDS['hit'].play()
+                    return True
+
+                for pipe in upperPipes:
+                    pipeHeight = GAME_SPRITES['pipe'][0].get_height()
+                    if (playery < pipeHeight + pipe['y'] and abs(playerx - pipe['x']) < GAME_SPRITES['pipe'][
+                        0].get_width()):
+                        GAME_SOUNDS['hit'].play()
+                        return True
+
+                for pipe in lowerPipes:
+                    if (playery + GAME_SPRITES['player'].get_height() > pipe['y']) and abs(playerx - pipe['x']) < \
+                            GAME_SPRITES['pipe'][0].get_width():
+                        GAME_SOUNDS['hit'].play()
+                        return True
+
+                return False
+
+
+            def getRandomPipe():
+                """
+                Generate positions of two pipes(one bottom straight and one top rotated ) for blitting on the screen
+                """
+                pipeHeight = GAME_SPRITES['pipe'][0].get_height()
+                offset = SCREENHEIGHT / 3
+                y2 = offset + random.randrange(0, int(SCREENHEIGHT - GAME_SPRITES['base'].get_height() - 1.2 * offset))
+                pipeX = SCREENWIDTH + 10
+                y1 = pipeHeight - y2 + offset
+                pipe = [
+                    {'x': pipeX, 'y': -y1},  # upper Pipe
+                    {'x': pipeX, 'y': y2}  # lower Pipe
+                ]
+                return pipe
+
+
+            if __name__ == "__main__":
+                # This will be the main point from where our game will start
+                pygame.init()  # Initialize all pygame's modules
+                FPSCLOCK = pygame.time.Clock()
+                pygame.display.set_caption('Flappy Bird by Abhijay')
+                GAME_SPRITES['numbers'] = (
+                    pygame.image.load('gallery/sprites/0.png').convert_alpha(),
+                    pygame.image.load('gallery/sprites/1.png').convert_alpha(),
+                    pygame.image.load('gallery/sprites/2.png').convert_alpha(),
+                    pygame.image.load('gallery/sprites/3.png').convert_alpha(),
+                    pygame.image.load('gallery/sprites/4.png').convert_alpha(),
+                    pygame.image.load('gallery/sprites/5.png').convert_alpha(),
+                    pygame.image.load('gallery/sprites/6.png').convert_alpha(),
+                    pygame.image.load('gallery/sprites/7.png').convert_alpha(),
+                    pygame.image.load('gallery/sprites/8.png').convert_alpha(),
+                    pygame.image.load('gallery/sprites/9.png').convert_alpha(),
+                )
+
+                GAME_SPRITES['message'] = pygame.image.load('gallery/sprites/message.png').convert_alpha()
+                GAME_SPRITES['base'] = pygame.image.load('gallery/sprites/base.png').convert_alpha()
+                GAME_SPRITES['pipe'] = (pygame.transform.rotate(pygame.image.load(PIPE).convert_alpha(), 180),
+                                        pygame.image.load(PIPE).convert_alpha()
+                                        )
+
+                # Game sounds
+                GAME_SOUNDS['die'] = pygame.mixer.Sound('gallery/audio/die.wav')
+                GAME_SOUNDS['hit'] = pygame.mixer.Sound('gallery/audio/hit.wav')
+                GAME_SOUNDS['point'] = pygame.mixer.Sound('gallery/audio/point.wav')
+                GAME_SOUNDS['swoosh'] = pygame.mixer.Sound('gallery/audio/swoosh.wav')
+                GAME_SOUNDS['wing'] = pygame.mixer.Sound('gallery/audio/wing.wav')
+
+                GAME_SPRITES['background'] = pygame.image.load(BACKGROUND).convert()
+                GAME_SPRITES['player'] = pygame.image.load(PLAYER).convert_alpha()
+
+                while True:
+                    welcomeScreen()  # Shows welcome screen to the user until he presses a button
+                    mainGame()  # This is the main game function
+
 
 
 
@@ -665,4 +824,4 @@ if __name__ == "__main__":
 
 
         else:
-            speak("i dont understand, cause well there might be typo error.")
+            speak("ERROR!")
